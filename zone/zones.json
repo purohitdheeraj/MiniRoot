@@ -1,0 +1,11 @@
+{
+  "myapp.local.": {
+    "A": "192.168.1.100",
+    "TTL": 300
+  },
+  "www.myapp.local.": {
+    "CNAME": "myapp.local.",
+    "TTL": 300
+  }
+}
+
