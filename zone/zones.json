@@ -1,11 +1,54 @@
 {
   "myapp.local.": {
     "A": "192.168.1.100",
+    "NS": ["ns1.myapp.local.", "ns2.myapp.local."],
+    "SOA": {
+      "mname": "ns1.myapp.local.",
+      "rname": "admin.myapp.local.",
+      "serial": 2024010101,
+      "refresh": 3600,
+      "retry": 1800,
+      "expire": 604800,
+      "minimum": 300
+    },
+    "MX": [
+      {
+        "priority": 10,
+        "exchange": "mail.myapp.local."
+      },
+      {
+        "priority": 20,
+        "exchange": "mail2.myapp.local."
+      }
+    ],
+    "TXT": [
+      "v=spf1 include:_spf.google.com ~all",
+      "google-site-verification=abc123"
+    ],
     "TTL": 300
   },
   "www.myapp.local.": {
     "CNAME": "myapp.local.",
     "TTL": 300
+  },
+  "mail.myapp.local.": {
+    "A": "192.168.1.101",
+    "TTL": 300
+  },
+  "mail2.myapp.local.": {
+    "A": "192.168.1.102",
+    "TTL": 300
+  },
+  "ns1.myapp.local.": {
+    "A": "192.168.1.103",
+    "TTL": 300
+  },
+  "ns2.myapp.local.": {
+    "A": "192.168.1.104",
+    "TTL": 300
+  },
+  "100.1.168.192.in-addr.arpa.": {
+    "PTR": "myapp.local.",
+    "TTL": 300
   }
 }
-

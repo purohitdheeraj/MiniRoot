@@ -3,7 +3,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import socket
-from dnslib import DNSRecord, QTYPE, RR, A, CNAME
+from dnslib import DNSRecord, QTYPE, RR, A, CNAME, NS, SOA, TXT, MX, PTR
 from zone.zone_loader import load_zones
 
 zones = load_zones()
@@ -39,6 +39,51 @@ def resolve(query):
         elif qtype == "CNAME" and "CNAME" in zone:
             cname = zone["CNAME"]
             return RR(qname, QTYPE.CNAME, rdata=CNAME(cname), ttl=zone.get("TTL", 300))
+
+        # NS (Name Server) records
+        elif qtype == "NS" and "NS" in zone:
+            ns_servers = zone["NS"]
+            if isinstance(ns_servers, list):
+                return [RR(qname, QTYPE.NS, rdata=NS(ns), ttl=zone.get("TTL", 300)) for ns in ns_servers]
+            else:
+                return RR(qname, QTYPE.NS, rdata=NS(ns_servers), ttl=zone.get("TTL", 300))
+
+        # SOA (Start of Authority) records
+        elif qtype == "SOA" and "SOA" in zone:
+            soa_data = zone["SOA"]
+            soa_rr = RR(qname, QTYPE.SOA, rdata=SOA(
+                mname=soa_data["mname"],
+                rname=soa_data["rname"],
+                times=(
+                    soa_data["serial"],
+                    soa_data["refresh"],
+                    soa_data["retry"],
+                    soa_data["expire"],
+                    soa_data["minimum"]
+                )
+            ), ttl=zone.get("TTL", 300))
+            return soa_rr
+
+        # TXT records
+        elif qtype == "TXT" and "TXT" in zone:
+            txt_data = zone["TXT"]
+            if isinstance(txt_data, list):
+                return [RR(qname, QTYPE.TXT, rdata=TXT(txt), ttl=zone.get("TTL", 300)) for txt in txt_data]
+            else:
+                return RR(qname, QTYPE.TXT, rdata=TXT(txt_data), ttl=zone.get("TTL", 300))
+
+        # MX (Mail Exchange) records
+        elif qtype == "MX" and "MX" in zone:
+            mx_records = zone["MX"]
+            if isinstance(mx_records, list):
+                return [RR(qname, QTYPE.MX, rdata=MX(mx["exchange"], mx["priority"]), ttl=zone.get("TTL", 300)) for mx in mx_records]
+            else:
+                return RR(qname, QTYPE.MX, rdata=MX(mx_records["exchange"], mx_records["priority"]), ttl=zone.get("TTL", 300))
+
+        # PTR (Pointer) records for reverse DNS
+        elif qtype == "PTR" and "PTR" in zone:
+            ptr_target = zone["PTR"]
+            return RR(qname, QTYPE.PTR, rdata=PTR(ptr_target), ttl=zone.get("TTL", 300))
 
     return None
 
