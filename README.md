@@ -120,6 +120,17 @@ The server is configured with these records:
 - Queries external DNS servers for unknown domains
 - Hybrid functionality - best of both worlds
 
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│    Client   │───▶│  Enhanced   │───▶│   Root      │───▶│    TLD      │
+│   (dig)     │    │  Recursive  │    │  Server     │    │  Server     │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+                           │                   │                   │
+                           ▼                   ▼                   ▼
+                   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+                   │Local Zones  │    │TLD Delegation│   │Domain       │
+                   │(myapp.local)│    │(.com, .org) │   │Delegation   │
+                   └─────────────┘    └─────────────┘   └─────────────┘
+
 ## Next Steps
 
 - [x] Add more record types (NS, SOA, TXT, MX, PTR, SRV)
