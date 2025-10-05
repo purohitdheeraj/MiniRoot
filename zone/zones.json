@@ -25,6 +25,20 @@
       "v=spf1 include:_spf.google.com ~all",
       "google-site-verification=abc123"
     ],
+    "SRV": [
+      {
+        "priority": 10,
+        "weight": 5,
+        "port": 80,
+        "target": "web.myapp.local."
+      },
+      {
+        "priority": 20,
+        "weight": 10,
+        "port": 8080,
+        "target": "web2.myapp.local."
+      }
+    ],
     "TTL": 300
   },
   "www.myapp.local.": {
@@ -45,6 +59,14 @@
   },
   "ns2.myapp.local.": {
     "A": "192.168.1.104",
+    "TTL": 300
+  },
+  "web.myapp.local.": {
+    "A": "192.168.1.105",
+    "TTL": 300
+  },
+  "web2.myapp.local.": {
+    "A": "192.168.1.106",
     "TTL": 300
   },
   "100.1.168.192.in-addr.arpa.": {

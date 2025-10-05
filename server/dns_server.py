@@ -3,7 +3,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import socket
-from dnslib import DNSRecord, QTYPE, RR, A, CNAME, NS, SOA, TXT, MX, PTR
+from dnslib import DNSRecord, QTYPE, RR, A, CNAME, NS, SOA, TXT, MX, PTR, SRV
 from zone.zone_loader import load_zones
 
 zones = load_zones()
@@ -85,11 +85,20 @@ def resolve(query):
             ptr_target = zone["PTR"]
             return RR(qname, QTYPE.PTR, rdata=PTR(ptr_target), ttl=zone.get("TTL", 300))
 
+        # SRV (Service) records for service discovery
+        elif qtype == "SRV" and "SRV" in zone:
+            srv_records = zone["SRV"]
+            if isinstance(srv_records, list):
+                return [RR(qname, QTYPE.SRV, rdata=SRV(srv["priority"], srv["weight"], srv["port"], srv["target"]), ttl=zone.get("TTL", 300)) for srv in srv_records]
+            else:
+                return RR(qname, QTYPE.SRV, rdata=SRV(srv_records["priority"], srv_records["weight"], srv_records["port"], srv_records["target"]), ttl=zone.get("TTL", 300))
+
     return None
 
 def run_server():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind(("127.0.0.1", 8053))  # You can change port if needed
+    sock.bind(("127.0.0.1", 8053)) 
+    
     print("✅ DNS Server running on 127.0.0.1:8053...")
 
     while True:
