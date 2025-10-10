@@ -15,7 +15,7 @@
       "args": ["server/dns_server.py"],
       "presentation": {
         "clear": true,
-        "group": "servers"
+        "group": "Core Local DNS Servers"
       },
       "isBackground": false,
       "icon": {
@@ -29,7 +29,7 @@
       "args": ["${workspaceFolder}/recursive.py"], // ${workspaceFolder} makes it more precise, but might be optional at times
       "presentation": {
         "clear": true,
-        "group": "servers"
+        "group": "Core Local DNS Servers"
       },
       "isBackground": false,
       "icon": {
@@ -43,7 +43,7 @@
       "args": ["root_server.py"],
       "presentation": {
         "clear": true,
-        "group": "servers"
+        "group": "DNS Hierarchy Simulation"
       },
       "isBackground": false,
       "icon": {
@@ -57,7 +57,7 @@
       "args": ["tld_server.py"],
       "presentation": {
         "clear": true,
-        "group": "servers",
+        "group": "DNS Hierarchy Simulation",
         "close": false
       },
       "isBackground": false,
@@ -72,7 +72,7 @@
       "args": ["enhanced_recursive.py"],
       "presentation": {
         "clear": true,
-        "group": "servers"
+        "group": "DNS Hierarchy Simulation"
       },
       "isBackground": false,
       "icon": {
