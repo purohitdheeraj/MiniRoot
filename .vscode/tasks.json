@@ -1,0 +1,98 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "echo",
+      "type": "shell",
+      "command": "echo Hello"
+    },
+    {
+      "label": "Run DNS Server",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": ["server/dns_server.py"],
+      "presentation": {
+        "clear": true,
+        "group": "servers"
+      },
+      "isBackground": false,
+      "icon": {
+        "id": "repo"
+      }
+    },
+    {
+      "label": "Run Recursive Server",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": ["${workspaceFolder}/recursive.py"], // ${workspaceFolder} makes it more precise, but might be optional at times
+      "presentation": {
+        "clear": true,
+        "group": "servers"
+      },
+      "isBackground": false,
+      "icon": {
+        "id": "git-pull-request"
+      }
+    },
+    {
+      "label": "Run Root Server",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": ["root_server.py"],
+      "presentation": {
+        "clear": true,
+        "group": "servers"
+      },
+      "isBackground": false,
+      "icon": {
+        "id": "server-environment"
+      }
+    },
+    {
+      "label": "Run TLD Server",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": ["tld_server.py"],
+      "presentation": {
+        "clear": true,
+        "group": "servers",
+        "close": false
+      },
+      "isBackground": false,
+      "icon": {
+        "id": "globe"
+      }
+    },
+    {
+      "label": "Run Enhanced Recursive Server",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": ["enhanced_recursive.py"],
+      "presentation": {
+        "clear": true,
+        "group": "servers"
+      },
+      "isBackground": false,
+      "icon": {
+        "id": "git-pull-request-create"
+      }
+    },
+    {
+      "label": "Run All Servers",
+      "dependsOn": [
+        "Run DNS Server",
+        "Run Recursive Server",
+        "Run Root Server",
+        "Run TLD Server",
+        "Run Enhanced Recursive Server"
+      ],
+      "problemMatcher": ["$python"],
+      "icon": {
+        "color": "terminal.ansiYellow",
+        "id": "server-environment"
+      }
+    }
+  ]
+}
