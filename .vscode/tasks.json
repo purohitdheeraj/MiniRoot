@@ -20,7 +20,8 @@
       "isBackground": false,
       "icon": {
         "id": "repo"
-      }
+      },
+      "problemMatcher": "$python"
     },
     {
       "label": "Run Recursive Server",
@@ -34,7 +35,8 @@
       "isBackground": false,
       "icon": {
         "id": "git-pull-request"
-      }
+      },
+      "problemMatcher": "$python"
     },
     {
       "label": "Run Root Server",
@@ -48,7 +50,8 @@
       "isBackground": false,
       "icon": {
         "id": "server-environment"
-      }
+      },
+      "problemMatcher": "$python"
     },
     {
       "label": "Run TLD Server",
@@ -63,7 +66,8 @@
       "isBackground": false,
       "icon": {
         "id": "globe"
-      }
+      },
+      "problemMatcher": "$python"
     },
     {
       "label": "Run Enhanced Recursive Server",
@@ -77,7 +81,8 @@
       "isBackground": false,
       "icon": {
         "id": "git-pull-request-create"
-      }
+      },
+      "problemMatcher": "$python"
     },
     {
       "label": "Run All Servers",
