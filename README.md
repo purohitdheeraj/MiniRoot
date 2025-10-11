@@ -58,6 +58,18 @@ mini-dns/
    python3 enhanced_recursive.py    # Enhanced recursive resolver (port 8057)
    ```
 
+   Alternatively, you can use vscode tasks to run the servers.
+
+   Steps:  
+   1. Open the repository in vscode.
+   2. Click `Ctrl+Shift+P` to open the command palette.
+   3. Type `Tasks: Run Task` and press `Enter`.
+   4. Select the task you want to run and press `Enter`. (Use task `Run All Servers` to run all servers at once)
+   5. The server(s) will start running in the terminal.
+   6. Take all the terminals to a single window and arrange them however you like. (Optional)
+   
+   Note: The tasks are configured in the `.vscode/tasks.json` file.
+
 3. **Test with dig**
 
    ```bash
